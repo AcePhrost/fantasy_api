@@ -6,18 +6,18 @@ from db import user, players
 
 
 
-@bp.get('/player')
+@app.get('/player')
 def player():
     return { 'players': list(player.values()) }
 
-@bp.get ('/player/<player_id>')
+@app.get ('/player/<player_id>')
 def get_player(player_id):
   try:
     return {'players': players[player_id]}, 200
   except KeyError:
     return {'message': "Invalid Player"}, 400
   
-@bp.post('/player')
+@app.post('/player')
 def add_player():
    players_data = request.get_json
    user_id = players_data['user_id']
@@ -26,10 +26,10 @@ def add_player():
       return {'message': "Player Added" }, 201
    return{'message': "Invalid User"}, 401
 
-@bp.put('/player/<player_id>')
+@app.put('/player/<player_id>')
 def update_player(player_id):
   try:
-    players = player[player_id]
+    Players = player[player_id]
     player_data = request.get_json()
     if player_data['user_id'] == players ['user_id']:
       player['player_id'] = player_data['']
@@ -38,10 +38,10 @@ def update_player(player_id):
   except:
      return {'message': "Invalid Player Id"}, 400
   
-@bp.delete('/player/<player_id>')
+@app.delete('/player/<player_id>')
 def del_player(player_id):
     try:
-        del players[player_id]
+        del player[player_id]
         return {'message': f'{player_id} has been deleted'}, 202
     except: 
         return {'message': 'Player not found'}, 400

@@ -1,20 +1,21 @@
 from flask import request
 from uuid import uuid4
-from app import app
 
+from . import bp
+from db import user
 
-@app.get('/user')
+@bp.get('/user')
 def user():
     return {'user': list (user.values()) }, 200
 
-@app.get('/user/<user_id>')
+@bp.get('/user/<user_id>')
 def get_user(username):
   try:
     return {'user': user[username] }
   except:
      return{'message': 'invalid user'}, 400
   
-@app.route('/user', methods=["players"])
+@bp.route('/user', methods=["players"])
 def create_user():
     user_data = request.get_json()
     for k in [ 'username', 'email']:
@@ -23,7 +24,7 @@ def create_user():
     user[uuid4()]= user_data
     return { 'message' f'{user_data["username"]} created'}, 201
 
-@app.put ('/user/<username>')
+@bp.put ('/user/<username>')
 def update_user(user_id):
   try:
     user = user[user_id]
@@ -33,7 +34,7 @@ def update_user(user_id):
   except KeyError:
     return {'message': "Invalid User"}, 400
   
-@app.delete('/user/<user_id>')
+@bp.delete('/user/<user_id>')
 def deleteuser(user_id):
   user_data = request.get_json()
   username = user_data['username']

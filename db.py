@@ -1,18 +1,20 @@
 user = {
     '1': {
         'username': 'Phrost',
-        'email': 'Camo@mail'
+        'email': 'Camo@mail',
+        'password': 'Who knows'
     },
 
     '2': {
         'username': 'Ace',
-        'email': 'something@mail'
+        'email': 'something@mail',
+        'password': 'Only I know'
     }
 }
 
-roster_id = {
-    '1'
-}
+# roster_id = {
+#     '1'
+# }
 
 players = {
     '1': {
